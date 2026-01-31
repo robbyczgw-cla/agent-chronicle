@@ -34,7 +34,15 @@ The skill activates on:
 
 ## First Run
 
-When you first use Agent Chronicle, run the setup script:
+**Setup runs automatically!** Just use any generate command:
+
+```bash
+python3 scripts/generate.py --today
+```
+
+If no `config.json` exists, the setup wizard starts automatically.
+
+Alternatively, run setup manually:
 
 ```bash
 python3 scripts/setup.py
@@ -45,8 +53,9 @@ This interactive onboarding will:
 2. Let you choose which sections to include
 3. Set your privacy level (private/shareable/public)
 4. Enable optional features (Quote Hall of Fame, Curiosity Backlog, etc.)
-5. Configure auto-generation settings
-6. Create necessary memory files
+5. Configure memory integration (add summaries to daily memory log)
+6. Configure auto-generation settings
+7. Create necessary memory files
 
 **Quick start without setup:**
 ```bash
@@ -340,6 +349,47 @@ When enabled, your daily template includes a "Relationship Notes" section.
 
 ---
 
+## Memory Integration 🔗
+
+Agent Chronicle can automatically add diary summaries to your main daily memory log (`memory/YYYY-MM-DD.md`), creating a unified view of your day.
+
+### Configuration
+
+```json
+"memory_integration": {
+  "enabled": true,
+  "append_to_daily": true,
+  "format": "summary"
+}
+```
+
+### Formats
+
+| Format | Description |
+|--------|-------------|
+| `summary` | Brief overview (title + summary text) |
+| `link` | Just a link to the full diary entry |
+| `full` | Entire entry embedded in daily memory |
+
+### Output Example
+
+When you generate a diary entry, this section is added to `memory/YYYY-MM-DD.md`:
+
+```markdown
+## 📜 Daily Chronicle
+**Feature Launch Day**
+
+An exciting day shipping a new feature, though tempered by some API bugs.
+```
+
+### Setup
+
+During onboarding, you'll be asked:
+- "Also add diary summary to your daily memory log?" (y/n)
+- Format choice (summary/link/full)
+
+---
+
 ## Configuration
 
 ### config.json
@@ -351,6 +401,11 @@ When enabled, your daily template includes a "Relationship Notes" section.
   "privacy_level": "private",
   "auto_generate": false,
   "template": "daily",
+  "memory_integration": {
+    "enabled": true,
+    "append_to_daily": true,
+    "format": "summary"
+  },
   "sections": {
     "summary": true,
     "projects": true,
@@ -609,6 +664,23 @@ My human was patient during the debugging session. Good collaborative energy. Th
 - Check diary_path in config.json
 - Ensure parent directories exist
 - Run `python3 scripts/setup.py` again
+
+## Changelog
+
+### v0.3.0
+- **Auto-Setup:** `generate.py` now automatically runs setup wizard if no config.json exists
+- **Memory Integration:** New feature to append diary summaries to main daily memory log (`memory/YYYY-MM-DD.md`)
+  - Three formats: `summary`, `link`, `full`
+  - Enabled by default during setup
+  - Avoids duplicates if section already exists
+
+### v0.2.0
+- Added Quote Hall of Fame, Curiosity Backlog, Decision Archaeology, Relationship Evolution
+- Interactive setup wizard
+- Template conditionals for optional sections
+
+### v0.1.0
+- Initial release with basic diary generation and export
 
 ## Credits
 

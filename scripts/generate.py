@@ -247,6 +247,58 @@ def save_entry(entry, diary_path, dry_run=False):
     print(f"✓ Saved diary entry to {output_file}")
     return output_file
 
+def append_to_daily_memory(entry, config, workspace):
+    """Append diary summary/link to main daily memory file."""
+    memory_integration = config.get("memory_integration", {})
+    
+    if not memory_integration.get("enabled", False):
+        return
+    
+    if not memory_integration.get("append_to_daily", False):
+        return
+    
+    date_str = entry.get("date", datetime.now().strftime("%Y-%m-%d"))
+    memory_dir = workspace / "memory"
+    daily_memory_file = memory_dir / f"{date_str}.md"
+    
+    # Determine format
+    format_type = memory_integration.get("format", "summary")
+    diary_path = config.get("diary_path", DEFAULT_DIARY_PATH)
+    
+    # Build the content to append
+    if format_type == "link":
+        content = f"\n\n## 📜 Daily Chronicle\n[View diary entry]({diary_path}{date_str}.md)\n"
+    elif format_type == "full":
+        template = load_template()
+        full_entry = render_template(template, entry)
+        content = f"\n\n## 📜 Daily Chronicle\n{full_entry}\n"
+    else:  # "summary" is default
+        summary = entry.get("summary", "No summary available.")
+        title = entry.get("title", "")
+        title_line = f"**{title}**\n\n" if title else ""
+        content = f"\n\n## 📜 Daily Chronicle\n{title_line}{summary}\n"
+    
+    # Create memory dir if needed
+    memory_dir.mkdir(parents=True, exist_ok=True)
+    
+    # Check if section already exists
+    if daily_memory_file.exists():
+        existing_content = daily_memory_file.read_text()
+        if "## 📜 Daily Chronicle" in existing_content:
+            print(f"  ℹ️  Daily Chronicle section already exists in {daily_memory_file}")
+            return
+        # Append to existing file
+        with open(daily_memory_file, 'a') as f:
+            f.write(content)
+    else:
+        # Create new file with header
+        header = f"# {date_str}\n\n*Daily memory log*\n"
+        with open(daily_memory_file, 'w') as f:
+            f.write(header + content)
+    
+    print(f"  ✓ Added chronicle to {daily_memory_file}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Generate AI Diary entries")
     parser.add_argument("--today", action="store_true", help="Generate for today")
@@ -258,6 +310,13 @@ def main():
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
     
     args = parser.parse_args()
+    
+    # Auto-trigger setup if no config exists
+    if not CONFIG_FILE.exists():
+        print("No config found. Running first-time setup...")
+        import setup
+        setup.main()
+        print()  # Blank line after setup
     
     config = load_config()
     workspace = get_workspace_root()
@@ -285,7 +344,10 @@ def main():
             entry = interactive_mode(date_str)
     
     if entry:
-        save_entry(entry, diary_path, dry_run=args.dry_run)
+        saved_file = save_entry(entry, diary_path, dry_run=args.dry_run)
+        # Append to daily memory if enabled and not dry run
+        if saved_file and not args.dry_run:
+            append_to_daily_memory(entry, config, workspace)
     else:
         print("No entry generated.")
 

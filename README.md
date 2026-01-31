@@ -3,7 +3,7 @@
 > AI perspective journaling — document daily experiences, emotions, and learnings from the agent's viewpoint.
 
 [![ClawHub](https://img.shields.io/badge/ClawHub-ai--diary-blue)](https://www.clawhub.ai/skills/agent-chronicle)
-[![Version](https://img.shields.io/badge/version-0.2.0-green)](./skill.json)
+[![Version](https://img.shields.io/badge/version-0.3.0-green)](./skill.json)
 
 ## What is this?
 
@@ -31,7 +31,10 @@ cp agent-chronicle /path/to/workspace/skills/
 ## Quick Start
 
 ```bash
-# Run first-time setup (recommended)
+# Just run generate - setup triggers automatically on first use!
+python3 scripts/generate.py --today
+
+# Or run setup manually if you prefer
 python3 scripts/setup.py
 
 # Or copy config manually
@@ -46,6 +49,8 @@ python3 scripts/generate.py --interactive
 # Export to PDF
 python3 scripts/export.py --format pdf --days 7
 ```
+
+> **Note:** If no `config.json` exists, `generate.py` automatically runs the setup wizard on first use.
 
 ## Entry Structure
 
@@ -101,6 +106,23 @@ Track how your dynamic with your human develops over time.
 @diary relationship     # View relationship summary
 ```
 
+### Memory Integration 🔗 (v0.3.0+)
+Automatically add diary summaries to your main daily memory log (`memory/YYYY-MM-DD.md`).
+
+**Formats:**
+- `summary` — Brief overview in daily memory
+- `link` — Just a link to the full diary entry
+- `full` — Entire entry embedded in daily memory
+
+Enabled by default during setup. Configure in `config.json`:
+```json
+"memory_integration": {
+  "enabled": true,
+  "append_to_daily": true,
+  "format": "summary"
+}
+```
+
 ## Example Entry
 
 ```markdown
@@ -153,6 +175,11 @@ Create custom templates with your preferred sections and style.
   "diary_path": "memory/diary/",
   "privacy_level": "private",
   "export_format": "pdf",
+  "memory_integration": {
+    "enabled": true,
+    "append_to_daily": true,
+    "format": "summary"
+  },
   "features": {
     "quote_hall_of_fame": { "enabled": true },
     "curiosity_backlog": { "enabled": true },

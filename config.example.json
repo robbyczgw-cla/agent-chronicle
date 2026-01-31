@@ -4,6 +4,11 @@
   "privacy_level": "private",
   "auto_generate": false,
   "template": "daily",
+  "memory_integration": {
+    "enabled": true,
+    "append_to_daily": true,
+    "format": "summary"
+  },
   "sections": {
     "summary": true,
     "projects": true,

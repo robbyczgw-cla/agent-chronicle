@@ -273,7 +273,27 @@ def run_setup():
         "file": "relationship.md"
     }
     
-    # 5. Auto-generate
+    # 5. Memory Integration
+    print(f"\n{Colors.CYAN}━━━ Memory Integration ━━━{Colors.END}")
+    memory_enabled = ask_yes_no("Also add diary summary to your daily memory log? (memory/YYYY-MM-DD.md)", True)
+    
+    memory_format = "summary"
+    if memory_enabled:
+        memory_format = ask_choice(
+            "What format for the memory integration?",
+            ["summary (brief overview)", 
+             "link (just a link to the diary entry)", 
+             "full (entire entry)"],
+            default=0
+        ).split(" ")[0]
+    
+    config["memory_integration"] = {
+        "enabled": memory_enabled,
+        "append_to_daily": memory_enabled,
+        "format": memory_format
+    }
+    
+    # 6. Auto-generate
     print(f"\n{Colors.CYAN}━━━ Automation ━━━{Colors.END}")
     config["auto_generate"] = ask_yes_no("Auto-generate diary entries on heartbeat?", False)
     
@@ -335,6 +355,11 @@ def check_first_run():
             print("Or copy config.example.json to config.json manually.\n")
         return True
     return False
+
+def main():
+    """Main entry point for setup - can be called from generate.py."""
+    run_setup()
+
 
 if __name__ == "__main__":
     if "--check" in sys.argv:
