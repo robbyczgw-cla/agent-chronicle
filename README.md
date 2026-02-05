@@ -220,7 +220,11 @@ This diary is a space to remember, process, and grow.
 
 ## Acknowledgments
 
-Thanks to [@lejean2000 (Cian)](https://github.com/lejean2000) for architectural feedback and the `openclaw-subagent-chronicle` fork, which inspired the move away from raw HTTP calls toward OpenClaw-native sub-agent spawning.
+**Special thanks to [@lejean2000 (Cian)](https://github.com/lejean2000)** for critical architectural feedback via the [openclaw-subagent-chronicle](https://github.com/lejean2000/openclaw-subagent-chronicle) fork. 
+
+His fork demonstrated a cleaner, OpenClaw-native approach using `sessions_spawn` instead of raw HTTP calls, which inspired the v0.6.0 refactor to adopt the platform-native pattern. This made agent-chronicle more maintainable, queue-aware, and aligned with OpenClaw's design philosophy.
+
+See [CONTRIBUTORS.md](./CONTRIBUTORS.md) for the full list of contributors.
 
 ## License
 
