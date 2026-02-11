@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.6.2 — 2026-02-11
+
+- Export hardening: added `--sandbox` to all pandoc calls in `scripts/export.py` (PDF and HTML paths, including PDF fallback run).
+- Docs updated (README, SKILL) to reflect sandboxed pandoc execution.
+
 ## v0.6.1 — 2026-02-11
 
 - Added `.gitignore` to exclude cache, config, and export files

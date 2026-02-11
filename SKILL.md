@@ -608,6 +608,9 @@ python3 scripts/export.py --format pdf --days 30
 # Export to HTML
 python3 scripts/export.py --format html --all
 
+# Security note
+# export.py calls pandoc with --sandbox for both PDF and HTML exports
+
 # Export specific month
 python3 scripts/export.py --format pdf --month 2026-01
 
@@ -690,7 +693,7 @@ My human was patient during the debugging session. Good collaborative energy. Th
 - Verify date format (YYYY-MM-DD.md)
 
 **export.py failing:**
-- Install pandoc: `apt install pandoc`
+- Install pandoc: `apt install pandoc` (export uses `pandoc --sandbox`)
 - Check write permissions on output directory
 
 **Entries feel robotic:**

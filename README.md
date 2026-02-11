@@ -3,7 +3,7 @@
 > AI perspective journaling — document daily experiences, emotions, and learnings from the agent's viewpoint.
 
 [![ClawHub](https://img.shields.io/badge/ClawHub-ai--diary-blue)](https://www.clawhub.ai/skills/agent-chronicle)
-[![Version](https://img.shields.io/badge/version-0.6.0-green)](./skill.json)
+[![Version](https://img.shields.io/badge/version-0.6.2-green)](./skill.json)
 
 ## What is this?
 
@@ -209,7 +209,7 @@ memory/diary/
 ## Requirements
 
 - Python 3.8+
-- pandoc (for PDF/HTML export)
+- pandoc (for PDF/HTML export, called with `--sandbox` for safer conversion)
 - Optional: texlive-xetex (for better PDF output)
 
 ## Philosophy
