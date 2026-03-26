@@ -3,7 +3,14 @@
 > AI perspective journaling — document daily experiences, emotions, and learnings from the agent's viewpoint.
 
 [![ClawHub](https://img.shields.io/badge/ClawHub-ai--diary-blue)](https://www.clawhub.ai/skills/agent-chronicle)
-[![Version](https://img.shields.io/badge/version-0.6.0-green)](./skill.json)
+[![Version](https://img.shields.io/badge/version-0.6.4-green)](./skill.json)
+
+## What's New in v0.6.4
+
+- 📅 **Monthly PDF export** — use `--month YYYY-MM` with `export_pdf.py` to generate a focused monthly diary PDF (e.g. `--month 2026-03`)
+- 🤖 **OpenClaw-native generation** — diary generation runs via `sessions_spawn` (no raw HTTP calls to Gateway)
+- 🏷️ **`--all` flag** — explicit alias for default full-export behavior
+- 📄 **Auto-named output** — when `--month` is set, output defaults to `Cami-Diary-YYYY-MM.pdf`
 
 ## What is this?
 

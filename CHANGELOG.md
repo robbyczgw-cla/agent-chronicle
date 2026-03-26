@@ -1,30 +1,30 @@
-## [0.6.3] - 2026-03-26
-
-### Added
-- `--month YYYY-MM` flag: export only entries from a specific month (e.g. `--month 2026-03`)
-- `--all` flag: explicit alias for default behavior (export all entries)
-- Default output filename when `--month` is set: `Cami-Diary-YYYY-MM.pdf`
-
-### Changed
-- Cron switched to monthly PDFs — smaller files, faster export, cleaner history
-
 # Changelog
 
-## [0.6.2] - 2026-03-03
-
+## [0.6.4] - 2026-03-26
 ### Changed
-- Synced changelog/docs and aligned package metadata with current release state.
+- README and CHANGELOG synchronized across ClawHub, GitHub, and local
+- Version badges updated
 
+## [0.6.3] - 2026-03-26
+### Added
+- `--month YYYY-MM` flag: export only entries from a specific month
+- `--all` flag: explicit alias for default behavior
+- Default output filename when `--month` is set: `Cami-Diary-YYYY-MM.pdf`
+### Changed
+- PDF export cron now generates monthly PDFs (smaller, faster)
 
-## v0.6.1 — 2026-02-11
+## [0.6.2] - 2026-03-03
+### Changed
+- Synced changelog/docs and aligned package metadata
 
-- Added `.gitignore` to exclude cache, config, and export files
+## [0.6.1] - 2026-02-11
+### Added
+- `.gitignore` to exclude cache, config, and export files
 - Updated metadata to openclaw format
 - Documentation consistency updates
 
-## v0.6.0 — 2026-02-05
-
-- **Architecture:** removed raw HTTP calls to the Gateway from `scripts/generate.py`.
-- **OpenClaw-native generation:** diary generation is now intended to run via **sub-agents** using the `sessions_spawn` tool (model selection is handled by OpenClaw defaults; no hardcoded model name).
-- **CLI ergonomics:** added `--emit-task` to print a portable JSON payload that agents can pass into `sessions_spawn`.
-
+## [0.6.0] - 2026-02-05
+### Changed
+- Removed raw HTTP calls to Gateway from scripts/generate.py
+- Diary generation now uses sessions_spawn (OpenClaw-native)
+- Added --emit-task CLI flag
