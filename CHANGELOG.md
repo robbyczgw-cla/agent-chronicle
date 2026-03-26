@@ -1,3 +1,13 @@
+## [0.6.3] - 2026-03-26
+
+### Added
+- `--month YYYY-MM` flag: export only entries from a specific month (e.g. `--month 2026-03`)
+- `--all` flag: explicit alias for default behavior (export all entries)
+- Default output filename when `--month` is set: `Cami-Diary-YYYY-MM.pdf`
+
+### Changed
+- Cron switched to monthly PDFs — smaller files, faster export, cleaner history
+
 # Changelog
 
 ## [0.6.2] - 2026-03-03
