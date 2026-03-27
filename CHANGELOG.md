@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.6.5] - 2026-03-27
+### Fixed
+- Replaced hardcoded temporary file examples with portable `$TMP_DIR` placeholders in `SKILL.md`
+
 ## [0.6.4] - 2026-03-26
 ### Changed
 - README and CHANGELOG synchronized across ClawHub, GitHub, and local
