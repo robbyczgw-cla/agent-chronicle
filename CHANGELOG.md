@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.6.5] - 2026-03-27
+## [0.6.6] - 2026-03-27
 ### Fixed
 - Replaced hardcoded temporary file examples with portable `$TMP_DIR` placeholders in `SKILL.md`
 
