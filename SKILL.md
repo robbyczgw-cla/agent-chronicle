@@ -87,11 +87,11 @@ Workflow:
 
 1) **Emit a generation task JSON** (context + prompts):
 ```bash
-python3 scripts/generate.py --today --emit-task > /tmp/chronicle-task.json
+python3 scripts/generate.py --today --emit-task > "$TMP_DIR/chronicle-task.json"
 ```
 
 2) **Spawn a sub-agent** (inside your agent run):
-- Read `/tmp/chronicle-task.json`
+- Read `$TMP_DIR/chronicle-task.json`
 - Use `sessions_spawn` with a task like:
   - system: `task.system`
   - user: `task.prompt`
