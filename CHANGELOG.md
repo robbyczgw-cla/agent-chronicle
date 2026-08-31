@@ -8,6 +8,7 @@
 - Added `sessions_yield` guidance after parallel `sessions_spawn` calls.
 - Documented that OpenClaw 2.0 sessions can cross calendar-day boundaries.
 - Updated README.md to match the OpenClaw 2.0 automation flow.
+- Removed `package.json`. It declared an npm package that was never published and had no `main`, dependencies, or scripts. ClawHub CLI 0.22+ refuses to publish any folder containing a `package.json` as a skill.
 
 ## [0.7.2] - 2026-03-27
 ### Changed
